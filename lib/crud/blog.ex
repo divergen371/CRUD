@@ -58,7 +58,8 @@ defmodule Crud.Blog do
     |> Repo.insert()
   end
 
-  @spec update_post(Crud.Blog.Post.t(), map()) :: {:ok, Crud.Blog.Post.t()} | {:error, Ecto.Changeset.t()}
+  @spec update_post(Crud.Blog.Post.t(), map()) ::
+          {:ok, Crud.Blog.Post.t()} | {:error, Ecto.Changeset.t()}
   @doc """
   Updates a post.
 
@@ -77,7 +78,8 @@ defmodule Crud.Blog do
     |> Repo.update()
   end
 
-  @spec delete_post(Crud.Blog.Post.t()) :: {:ok, Crud.Blog.Post.t()} | {:error, Ecto.Changeset.t()}
+  @spec delete_post(Crud.Blog.Post.t()) ::
+          {:ok, Crud.Blog.Post.t()} | {:error, Ecto.Changeset.t()}
   @doc """
   Deletes a post.
 

@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:alpine
+    container_name: crud-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres  # 本番環境では強力なパスワードに変更すべき
+      POSTGRES_DB: crud_dev
+      # 以下のセキュリティ設定を追加
+      POSTGRES_INITDB_ARGS: "--auth-host=scram-sha-256"
+    ports:
+      # ローカル開発環境のみでアクセスできるように制限
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    restart: unless-stopped
+    # リソース制限を追加
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+    # 最低限必要な権限のみ付与
+    cap_drop:
+      - ALL
+    cap_add:
+      - CHOWN
+      - SETGID
+      - SETUID 
